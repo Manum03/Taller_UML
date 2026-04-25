@@ -1,0 +1,69 @@
+# Actividad 2 – Casos de Uso
+## Contexto
+Plataforma educativa donde estudiantes consultan cursos, entregan tareas y revisan calificaciones,
+mientras los docentes publican actividades y califican entregas.
+
+---
+
+## 1. Actores principales del sistema
+
+| Actor       | Descripción                                                          |
+|-------------|----------------------------------------------------------------------|
+| `Estudiante`| Usuario que accede a los cursos, entrega trabajos y consulta notas   |
+| `Docente`   | Usuario que crea actividades, publica contenido y evalúa entregas    |
+
+---
+
+## 2. Diagrama de casos de uso
+
+Ver archivo: **diagrama_casos_uso.png** (en esta misma carpeta)
+
+### Casos de uso identificados
+
+| #  | Caso de uso           | Actor(es)            |
+|----|-----------------------|----------------------|
+| 1  | Consultar cursos      | Estudiante, Docente  |
+| 2  | Entregar tarea        | Estudiante           |
+| 3  | Revisar calificaciones| Estudiante           |
+| 4  | Publicar actividad    | Docente              |
+| 5  | Calificar entrega     | Docente              |
+
+---
+
+## 3. Distribución de acciones por actor
+
+**Estudiante:**
+- Consultar cursos disponibles y su contenido.
+- Entregar tareas dentro del plazo establecido.
+- Revisar las calificaciones obtenidas por sus entregas.
+
+**Docente:**
+- Publicar nuevas actividades con enunciado, recursos y fecha límite.
+- Calificar las entregas de los estudiantes y añadir retroalimentación.
+- Consultar los cursos que dicta (acceso de solo lectura compartido).
+
+---
+
+## 4. Descripciones textuales de casos de uso
+
+---
+
+### Caso de Uso 1: Entregar Tarea
+
+| Campo           | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| **Actor**       | Estudiante                                                              |
+| **Objetivo**    | Enviar el archivo o texto de respuesta de una actividad antes del cierre|
+| **Flujo principal** | 1. El estudiante inicia sesión en la plataforma. <br> 2. Navega a la sección "Mis cursos" y selecciona el curso correspondiente. <br> 3. Localiza la actividad con estado "Pendiente". <br> 4. Hace clic en "Entregar tarea". <br> 5. Adjunta el archivo o escribe su respuesta en el campo de texto. <br> 6. Confirma el envío. <br> 7. El sistema registra la entrega con marca de tiempo y notifica al docente. |
+| **Resultado**   | La tarea queda registrada en el sistema con estado "Entregada" y el estudiante recibe confirmación de envío. |
+
+---
+
+### Caso de Uso 2: Calificar Entrega
+
+| Campo           | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| **Actor**       | Docente                                                                 |
+| **Objetivo**    | Asignar una nota y retroalimentación a la entrega de un estudiante      |
+| **Flujo principal** | 1. El docente inicia sesión en la plataforma. <br> 2. Accede a "Gestión de actividades" y selecciona una actividad publicada. <br> 3. Visualiza la lista de entregas recibidas. <br> 4. Selecciona la entrega de un estudiante. <br> 5. Revisa el archivo o texto entregado. <br> 6. Ingresa la calificación numérica y un comentario de retroalimentación. <br> 7. Guarda la evaluación. <br> 8. El sistema notifica al estudiante que su entrega fue calificada. |
+| **Resultado**   | La calificación queda registrada y visible para el estudiante en su sección "Mis calificaciones". |

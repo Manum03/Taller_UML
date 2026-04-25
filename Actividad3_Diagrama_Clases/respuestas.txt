@@ -1,0 +1,76 @@
+# Actividad 3 – Diagrama de Clases
+## Contexto
+Biblioteca que administra libros, usuarios y préstamos.
+Un usuario puede solicitar varios préstamos y cada préstamo se asocia a un libro.
+
+---
+
+## 1. Diagrama de clases
+
+Ver archivo: **diagrama_clases.png** (en esta misma carpeta)
+
+---
+
+## 2. Definición de clases, atributos y métodos
+
+### Clase `Usuario`
+| Atributo / Método           | Tipo        | Descripción                                     |
+|-----------------------------|-------------|-------------------------------------------------|
+| `- id`                      | int         | Identificador único del usuario                 |
+| `- nombre`                  | String      | Nombre del usuario                              |
+| `- apellido`                | String      | Apellido del usuario                            |
+| `- email`                   | String      | Correo electrónico                              |
+| `+ consultarPrestamos()`    | List        | Retorna la lista de préstamos activos del usuario|
+| `+ solicitarPrestamo(libro)`| Prestamo    | Genera un nuevo préstamo para el libro indicado |
+
+### Clase `Libro`
+| Atributo / Método           | Tipo    | Descripción                                         |
+|-----------------------------|---------|-----------------------------------------------------|
+| `- isbn`                    | String  | Código único del libro                              |
+| `- titulo`                  | String  | Título del libro                                    |
+| `- autor`                   | String  | Nombre del autor                                    |
+| `- disponible`              | boolean | Indica si el libro puede prestarse                  |
+| `+ mostrarInfo()`           | String  | Retorna información formateada del libro            |
+| `+ marcarPrestado()`        | void    | Cambia disponible a false                           |
+| `+ marcarDisponible()`      | void    | Cambia disponible a true                            |
+
+### Clase `Prestamo`
+| Atributo / Método           | Tipo    | Descripción                                         |
+|-----------------------------|---------|-----------------------------------------------------|
+| `- id`                      | int     | Identificador único del préstamo                    |
+| `- fechaPrestamo`           | Date    | Fecha en que se realizó el préstamo                 |
+| `- fechaDevolucion`         | Date    | Fecha límite de devolución                          |
+| `- estado`                  | String  | "activo", "devuelto" o "vencido"                    |
+| `+ estaVigente()`           | boolean | Verifica si la fecha actual está dentro del plazo   |
+| `+ renovar()`               | void    | Extiende la fecha de devolución                     |
+| `+ calcularMora()`          | double  | Calcula multa si hay retraso                        |
+
+---
+
+## 3. Relaciones y multiplicidades
+
+| Relación                        | Tipo       | Multiplicidad     | Descripción                                    |
+|---------------------------------|------------|-------------------|------------------------------------------------|
+| `Usuario` → `Prestamo`          | Asociación | 1 a 1..*          | Un usuario puede tener uno o varios préstamos  |
+| `Prestamo` → `Libro`            | Asociación | 1..* a 1          | Un préstamo referencia exactamente un libro    |
+
+**Lectura del modelo:**
+- Un `Usuario` tiene **uno o muchos** `Prestamo` (1 .. 1..*).
+- Cada `Prestamo` referencia **exactamente un** `Libro` (1..* .. 1).
+- Un `Libro` puede aparecer en múltiples préstamos a lo largo del tiempo
+  (no simultáneamente, gracias al atributo `disponible`).
+
+---
+
+## 4. Diferencia entre atributo y método
+
+| Concepto      | Definición                                              | Ejemplo del diagrama                              |
+|---------------|---------------------------------------------------------|---------------------------------------------------|
+| **Atributo**  | Dato o característica que describe el estado del objeto | `- disponible : boolean` en `Libro`               |
+| **Método**    | Comportamiento o acción que el objeto puede ejecutar    | `+ marcarPrestado() : void` en `Libro`            |
+
+**Explicación con el diagrama:**
+El atributo `disponible` de la clase `Libro` almacena si el libro puede ser prestado (estado).
+El método `marcarPrestado()` es la acción que *cambia* ese estado: establece `disponible = false`
+cuando se registra un préstamo. El atributo responde a "¿qué tiene o cómo es el objeto?";
+el método responde a "¿qué puede hacer el objeto?".

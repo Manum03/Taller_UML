@@ -1,0 +1,89 @@
+# Actividad 4 – Transformación UML a Código
+
+## Diagrama UML de la clase Producto
+
+```
+┌──────────────────────────┐
+│         Producto         │
+├──────────────────────────┤
+│ - codigo  : String       │
+│ - nombre  : String       │
+│ - precio  : double       │
+├──────────────────────────┤
+│ + mostrarInfo() : void   │
+└──────────────────────────┘
+```
+
+---
+
+## 1. Traducción de atributos UML → tipo de dato en Java
+
+| Atributo UML     | Tipo en UML | Tipo en Java | Justificación                                                   |
+|------------------|-------------|-------------|------------------------------------------------------------------|
+| `codigo`         | String      | `String`    | Cadena de texto; Java usa `String` con mayúscula                |
+| `nombre`         | String      | `String`    | Igual que el anterior                                           |
+| `precio`         | double      | `double`    | Número decimal de doble precisión, válido para valores monetarios|
+
+---
+
+## 2. Versión equivalente en Python
+
+Ver archivo: **producto.py** (en esta misma carpeta)
+
+**Diferencias clave de Python respecto a Java:**
+
+| Aspecto         | Java                          | Python                                      |
+|-----------------|-------------------------------|---------------------------------------------|
+| Tipo de dato    | Declarado explícitamente      | Inferido dinámicamente (type hints opcionales)|
+| Privacidad      | `private` (enforced)          | Convención `__atributo` (name mangling)     |
+| Getters/Setters | Métodos `get/set` explícitos  | Decoradores `@property` y `@x.setter`       |
+| Punto de entrada| `public static void main()`   | Bloque `if __name__ == "__main__":`         |
+| Tipos numéricos | `double`, `int`, `float`      | `float` para todos los decimales            |
+
+---
+
+## 3. Elementos que se mantienen y los que cambian al pasar al código
+
+### Se mantienen:
+- El **nombre de la clase** (`Producto`).
+- Los **nombres de los atributos** (`codigo`, `nombre`, `precio`).
+- El **nombre del método** (`mostrarInfo()`).
+- La **visibilidad**: atributos privados (`-`) y método público (`+`).
+- La **estructura general** de tres compartimientos (nombre, atributos, métodos).
+
+### Cambian:
+- Los **tipos de dato** adoptan la sintaxis del lenguaje de destino (`String` en Java, `str` en Python).
+- En Java se añade un **constructor** explícito que en UML no siempre se muestra.
+- En Python se usa `__init__` en lugar de constructor tradicional.
+- Java requiere **getters y setters** como métodos separados; Python los integra con `@property`.
+- Java necesita el método `main()` dentro de la misma clase para ejecutar la prueba.
+
+---
+
+## 4. Objeto de prueba y salida esperada
+
+### Java (`Producto.java`)
+```java
+Producto p1 = new Producto("P-001", "Laptop Dell Inspiron", 2499999.99);
+p1.mostrarInfo();
+```
+**Salida:**
+```
+=== Información del Producto ===
+Código : P-001
+Nombre : Laptop Dell Inspiron
+Precio : $2499999.99
+```
+
+### Python (`producto.py`)
+```python
+p1 = Producto("P-001", "Laptop Dell Inspiron", 2499999.99)
+p1.mostrarInfo()
+```
+**Salida:**
+```
+=== Información del Producto ===
+Código : P-001
+Nombre : Laptop Dell Inspiron
+Precio : $2,499,999.99
+```
